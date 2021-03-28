@@ -1,6 +1,7 @@
 export type RootStackParamList = {
-  Home: undefined;
+  Home: { post?: string };
   Profile: { userId: string };
   Feed: { sort: 'latest' | 'top' } | undefined;
-  Details: undefined;
+  Details: { itemId: number };
+  CreatePost: undefined;
 };

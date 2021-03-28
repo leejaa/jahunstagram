@@ -1,18 +1,24 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RootStackParamList } from '../types';
+import CreatePostScreen from './CreatePostScreen';
+import DetailsScreen from './DetailsScreen';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
 type Props = {
+  route: HomeScreenRouteProp;
   navigation: HomeScreenNavigationProp;
 };
-const HomeScreen = ({ navigation }: Props) => {
+const Tab = createBottomTabNavigator();
+const HomeScreen = ({ route, navigation }: Props) => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="Messages" component={DetailsScreen} />
+      <Tab.Screen name="Feed" component={CreatePostScreen} />
+    </Tab.Navigator>
   );
 };
 export default HomeScreen;
